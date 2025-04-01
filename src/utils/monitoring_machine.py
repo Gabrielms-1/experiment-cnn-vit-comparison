@@ -5,7 +5,7 @@ from datetime import datetime
 
 INTERVAL = 15  # 15 seconds
 
-with open("data/metrics_log.csv", "w") as f:
+with open("results/metrics_log.csv", "w") as f:
     f.write("Timestamp,GPU_Util(%),GPU_Mem_Util(%),GPU_Mem_Used(MB),GPU_Mem_Total(MB),CPU_Usage(%),Mem_Usage(%),Mem_Used(MB),Mem_Total(MB)\n")
 
 while True:
@@ -43,7 +43,7 @@ while True:
         f"Mem Total: {mem_total:.2f} \n"
     )
 
-    with open("data/metrics_log.csv", "a") as f:
+    with open("results/metrics_log.csv", "a") as f:
         f.write(metrics + "\n")
 
     print(metrics)
