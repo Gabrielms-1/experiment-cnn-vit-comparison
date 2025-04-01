@@ -26,14 +26,14 @@ def compute_metrics(confusion_matrix):
     
     return precision, recall, f1_score
 
-def evaluate_model(model, val_loader, criterion, device):
+def evaluate_model(model, val_loader, criterion, device, n_classes):
     model.eval()
     
     val_loss = 0
     correct_predictions = 0
     total_samples = 0
 
-    confusion_matrix = torch.zeros(2, 2)
+    confusion_matrix = torch.zeros(n_classes, n_classes)
 
     with torch.no_grad():
         for batch_idx, (data, target, _) in enumerate(val_loader):
@@ -58,7 +58,9 @@ def evaluate_model(model, val_loader, criterion, device):
     return average_loss, accuracy, precision, recall, f1_score, confusion_matrix
 
 
-def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device):
+def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device, n_classes):
+
+    
 
     train_losses = []
     val_losses = []
@@ -91,7 +93,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         epoch_loss /= len(train_loader.dataset)
         train_losses.append(epoch_loss)
 
-        val_loss, val_accuracy, val_precision, val_recall, val_f1_score, confusion_matrix = evaluate_model(model, val_loader, criterion, device)
+        val_loss, val_accuracy, val_precision, val_recall, val_f1_score, confusion_matrix = evaluate_model(model, val_loader, criterion, device, n_classes)
 
         val_losses.append(val_loss)
         val_accuracies.append(val_accuracy)
@@ -164,7 +166,7 @@ def main(args, config):
     print(f"Using device: {device}")
     model.to(device)
 
-    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, config["TRAIN"]["epochs"], optimizer, criterion, train_loader, val_loader, device)
+    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, config["TRAIN"]["epochs"], optimizer, criterion, train_loader, val_loader, device, args.n_classes)
 
     class_names = [str(val_dataset.int_to_label_map[i]) for i in range(confusion_matrix.shape[0])]
 
