@@ -60,8 +60,6 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
 
 def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device, n_classes):
 
-    
-
     train_losses = []
     val_losses = []
     val_accuracies = []
@@ -204,6 +202,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=config["TRAIN"]["batch_size"])
     parser.add_argument("--resize", type=int, default=config["MODEL"]["img_size"])
     parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M-%S"))
+    parser.add_argument("--n_classes", type=int, default=config["MODEL"]["n_classes"])
     args = parser.parse_args()
     
     main(args, config)
