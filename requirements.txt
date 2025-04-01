@@ -1,0 +1,8 @@
+wandb
+albumentations
+torch
+torchvision
+numpy
+seaborn
+matplotlib
+opencv-python
