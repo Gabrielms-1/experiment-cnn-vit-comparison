@@ -124,7 +124,7 @@ def main(args, config):
 
     wandb.init(
         project=config["PROJECT"]["name"], 
-        name=f"{config["PROJECT"]}-vit-model_{args.timestamp}",
+        name=f"{config["PROJECT"]["name"]}_{args.timestamp}",
         config={
             "epochs": config["TRAIN"]["epochs"],
             "batch_size": config["TRAIN"]["batch_size"],
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     parser.add_argument("--val_dir", type=str, default=config["LOCAL"]["val_dir"])
     parser.add_argument("--batch_size", type=int, default=config["TRAIN"]["batch_size"])
     parser.add_argument("--resize", type=int, default=config["MODEL"]["img_size"])
-    parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M-%S"))
+    parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M"))
     parser.add_argument("--n_classes", type=int, default=config["MODEL"]["n_classes"])
     args = parser.parse_args()
     
