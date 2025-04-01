@@ -1,3 +1,6 @@
+PROJECT:
+  name: "pokemon-classification-vit"
+
 MODEL:
   d_model: 9
   n_classes: 5
@@ -8,7 +11,7 @@ MODEL:
   n_layers: 3
 
 TRAIN:
-  epochs: 10
+  epochs: 25
   batch_size: 24
   lr: 0.001
 
