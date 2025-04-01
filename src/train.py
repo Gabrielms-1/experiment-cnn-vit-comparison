@@ -123,8 +123,8 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
 def main(args, config):
 
     wandb.init(
-        project=config["PROJECT"]["name"], 
-        name=f"{config["PROJECT"]["name"]}-{args.timestamp}",
+        project=f"{config['PROJECT']['name']}", 
+        name=f"{config['PROJECT']['name']}-{args.timestamp}",
         config={
             "epochs": config["TRAIN"]["epochs"],
             "batch_size": config["TRAIN"]["batch_size"],
