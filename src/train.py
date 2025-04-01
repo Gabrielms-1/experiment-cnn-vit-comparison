@@ -161,6 +161,7 @@ def main(args, config):
     criterion = torch.nn.CrossEntropyLoss()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
     model.to(device)
 
     train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, config["TRAIN"]["epochs"], optimizer, criterion, train_loader, val_loader, device)
