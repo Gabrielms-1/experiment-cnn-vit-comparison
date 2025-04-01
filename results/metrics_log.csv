@@ -1,0 +1,691 @@
+Timestamp,GPU_Util(%),GPU_Mem_Util(%),GPU_Mem_Used(MB),GPU_Mem_Total(MB),CPU_Usage(%),Mem_Usage(%),Mem_Used(MB),Mem_Total(MB)
+Timestamp: 2025-04-01 19:28:23, 
+GPU Util: 100.0, 
+GPU Mem Util: 87.0, 
+GPU Mem Used: 3363.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 90.9, 
+Mem Usage: 17.9, 
+Mem Used: 2081.80, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:28:38, 
+GPU Util: 77.0, 
+GPU Mem Util: 65.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.7, 
+Mem Usage: 17.9, 
+Mem Used: 2049.30, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:28:53, 
+GPU Util: 77.0, 
+GPU Mem Util: 63.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.9, 
+Mem Usage: 16.5, 
+Mem Used: 1774.59, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:29:08, 
+GPU Util: 92.0, 
+GPU Mem Util: 84.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.2, 
+Mem Usage: 16.7, 
+Mem Used: 2051.07, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:29:23, 
+GPU Util: 74.0, 
+GPU Mem Util: 66.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 70.4, 
+Mem Usage: 17.6, 
+Mem Used: 2020.98, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:29:38, 
+GPU Util: 100.0, 
+GPU Mem Util: 85.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.8, 
+Mem Usage: 18.0, 
+Mem Used: 2088.69, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:29:53, 
+GPU Util: 94.0, 
+GPU Mem Util: 73.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.0, 
+Mem Usage: 18.8, 
+Mem Used: 2189.39, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:30:08, 
+GPU Util: 96.0, 
+GPU Mem Util: 78.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 67.9, 
+Mem Usage: 18.4, 
+Mem Used: 2050.92, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:30:23, 
+GPU Util: 74.0, 
+GPU Mem Util: 46.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 66.6, 
+Mem Usage: 16.3, 
+Mem Used: 2054.84, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:30:38, 
+GPU Util: 75.0, 
+GPU Mem Util: 66.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 70.5, 
+Mem Usage: 18.3, 
+Mem Used: 2095.50, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:30:53, 
+GPU Util: 84.0, 
+GPU Mem Util: 60.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.8, 
+Mem Usage: 18.1, 
+Mem Used: 2069.76, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:31:08, 
+GPU Util: 100.0, 
+GPU Mem Util: 87.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.7, 
+Mem Usage: 18.1, 
+Mem Used: 2099.21, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:31:23, 
+GPU Util: 81.0, 
+GPU Mem Util: 56.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.5, 
+Mem Usage: 19.1, 
+Mem Used: 2257.09, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:31:38, 
+GPU Util: 84.0, 
+GPU Mem Util: 79.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 67.7, 
+Mem Usage: 17.5, 
+Mem Used: 2126.69, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:31:53, 
+GPU Util: 79.0, 
+GPU Mem Util: 60.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.8, 
+Mem Usage: 18.7, 
+Mem Used: 2207.24, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:32:08, 
+GPU Util: 99.0, 
+GPU Mem Util: 89.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.2, 
+Mem Usage: 18.7, 
+Mem Used: 2203.02, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:32:23, 
+GPU Util: 79.0, 
+GPU Mem Util: 54.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.0, 
+Mem Usage: 18.2, 
+Mem Used: 2122.38, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:32:38, 
+GPU Util: 80.0, 
+GPU Mem Util: 56.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.4, 
+Mem Usage: 17.8, 
+Mem Used: 2038.66, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:32:53, 
+GPU Util: 94.0, 
+GPU Mem Util: 75.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.2, 
+Mem Usage: 18.8, 
+Mem Used: 2224.19, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:33:09, 
+GPU Util: 80.0, 
+GPU Mem Util: 61.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.9, 
+Mem Usage: 17.3, 
+Mem Used: 1895.26, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:33:24, 
+GPU Util: 100.0, 
+GPU Mem Util: 87.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 65.7, 
+Mem Usage: 17.0, 
+Mem Used: 2220.32, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:33:39, 
+GPU Util: 91.0, 
+GPU Mem Util: 68.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 71.7, 
+Mem Usage: 17.7, 
+Mem Used: 1945.91, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:33:54, 
+GPU Util: 76.0, 
+GPU Mem Util: 51.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.8, 
+Mem Usage: 18.5, 
+Mem Used: 2101.16, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:34:09, 
+GPU Util: 98.0, 
+GPU Mem Util: 81.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.4, 
+Mem Usage: 18.8, 
+Mem Used: 2217.82, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:34:24, 
+GPU Util: 82.0, 
+GPU Mem Util: 70.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.6, 
+Mem Usage: 19.1, 
+Mem Used: 2265.50, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:34:39, 
+GPU Util: 62.0, 
+GPU Mem Util: 37.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 66.9, 
+Mem Usage: 15.4, 
+Mem Used: 1994.53, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:34:54, 
+GPU Util: 90.0, 
+GPU Mem Util: 68.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.8, 
+Mem Usage: 18.9, 
+Mem Used: 2230.47, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:35:09, 
+GPU Util: 79.0, 
+GPU Mem Util: 53.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.9, 
+Mem Usage: 17.4, 
+Mem Used: 2001.73, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:35:24, 
+GPU Util: 79.0, 
+GPU Mem Util: 54.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.1, 
+Mem Usage: 17.3, 
+Mem Used: 1963.59, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:35:39, 
+GPU Util: 87.0, 
+GPU Mem Util: 81.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.2, 
+Mem Usage: 18.8, 
+Mem Used: 2220.27, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:35:54, 
+GPU Util: 74.0, 
+GPU Mem Util: 64.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.3, 
+Mem Usage: 17.2, 
+Mem Used: 1962.54, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:36:09, 
+GPU Util: 78.0, 
+GPU Mem Util: 55.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.5, 
+Mem Usage: 17.5, 
+Mem Used: 2005.36, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:36:24, 
+GPU Util: 100.0, 
+GPU Mem Util: 90.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.2, 
+Mem Usage: 18.3, 
+Mem Used: 2141.55, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:36:39, 
+GPU Util: 100.0, 
+GPU Mem Util: 86.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.7, 
+Mem Usage: 18.6, 
+Mem Used: 2180.18, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:36:54, 
+GPU Util: 77.0, 
+GPU Mem Util: 56.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.9, 
+Mem Usage: 16.3, 
+Mem Used: 1836.17, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:37:09, 
+GPU Util: 76.0, 
+GPU Mem Util: 65.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.2, 
+Mem Usage: 18.1, 
+Mem Used: 2100.72, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:37:24, 
+GPU Util: 88.0, 
+GPU Mem Util: 79.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.0, 
+Mem Usage: 18.6, 
+Mem Used: 2178.32, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:37:39, 
+GPU Util: 96.0, 
+GPU Mem Util: 87.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 65.7, 
+Mem Usage: 15.0, 
+Mem Used: 2008.98, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:37:54, 
+GPU Util: 81.0, 
+GPU Mem Util: 56.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 72.2, 
+Mem Usage: 17.2, 
+Mem Used: 1963.86, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:38:09, 
+GPU Util: 77.0, 
+GPU Mem Util: 71.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.3, 
+Mem Usage: 18.0, 
+Mem Used: 2091.09, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:38:24, 
+GPU Util: 88.0, 
+GPU Mem Util: 80.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.5, 
+Mem Usage: 18.3, 
+Mem Used: 2131.27, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:38:39, 
+GPU Util: 84.0, 
+GPU Mem Util: 59.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.1, 
+Mem Usage: 19.7, 
+Mem Used: 2351.71, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:38:54, 
+GPU Util: 72.0, 
+GPU Mem Util: 45.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 67.5, 
+Mem Usage: 17.3, 
+Mem Used: 2181.38, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:39:09, 
+GPU Util: 82.0, 
+GPU Mem Util: 71.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 70.3, 
+Mem Usage: 17.8, 
+Mem Used: 2065.18, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:39:24, 
+GPU Util: 94.0, 
+GPU Mem Util: 73.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.1, 
+Mem Usage: 18.4, 
+Mem Used: 2155.98, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:39:39, 
+GPU Util: 87.0, 
+GPU Mem Util: 79.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.7, 
+Mem Usage: 16.6, 
+Mem Used: 1866.92, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:39:54, 
+GPU Util: 77.0, 
+GPU Mem Util: 62.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.5, 
+Mem Usage: 18.1, 
+Mem Used: 2110.95, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:40:10, 
+GPU Util: 57.0, 
+GPU Mem Util: 46.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.0, 
+Mem Usage: 17.5, 
+Mem Used: 2106.71, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:40:25, 
+GPU Util: 100.0, 
+GPU Mem Util: 86.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.2, 
+Mem Usage: 18.3, 
+Mem Used: 2145.24, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:40:40, 
+GPU Util: 82.0, 
+GPU Mem Util: 75.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.8, 
+Mem Usage: 18.6, 
+Mem Used: 2191.68, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:40:55, 
+GPU Util: 93.0, 
+GPU Mem Util: 85.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.8, 
+Mem Usage: 18.7, 
+Mem Used: 2208.34, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:41:10, 
+GPU Util: 73.0, 
+GPU Mem Util: 48.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.4, 
+Mem Usage: 17.8, 
+Mem Used: 2011.34, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:41:25, 
+GPU Util: 82.0, 
+GPU Mem Util: 59.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.8, 
+Mem Usage: 18.8, 
+Mem Used: 2224.73, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:41:40, 
+GPU Util: 100.0, 
+GPU Mem Util: 86.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.9, 
+Mem Usage: 19.1, 
+Mem Used: 2173.59, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:41:55, 
+GPU Util: 85.0, 
+GPU Mem Util: 59.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 66.5, 
+Mem Usage: 16.3, 
+Mem Used: 2106.42, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:42:10, 
+GPU Util: 72.0, 
+GPU Mem Util: 51.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 71.8, 
+Mem Usage: 18.4, 
+Mem Used: 2089.72, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:42:25, 
+GPU Util: 81.0, 
+GPU Mem Util: 75.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.1, 
+Mem Usage: 16.3, 
+Mem Used: 1815.70, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:42:40, 
+GPU Util: 75.0, 
+GPU Mem Util: 51.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 69.0, 
+Mem Usage: 18.5, 
+Mem Used: 2137.75, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:42:55, 
+GPU Util: 81.0, 
+GPU Mem Util: 72.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 68.9, 
+Mem Usage: 19.2, 
+Mem Used: 2274.41, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:43:10, 
+GPU Util: 71.0, 
+GPU Mem Util: 44.0, 
+GPU Mem Used: 3365.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 67.5, 
+Mem Usage: 14.9, 
+Mem Used: 1827.77, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:43:25, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 7.1, 
+Mem Usage: 5.8, 
+Mem Used: 626.41, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:43:40, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.1, 
+Mem Usage: 4.4, 
+Mem Used: 407.20, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:43:55, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.0, 
+Mem Usage: 4.2, 
+Mem Used: 376.84, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:44:10, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.1, 
+Mem Usage: 4.2, 
+Mem Used: 370.36, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:44:25, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.1, 
+Mem Usage: 4.2, 
+Mem Used: 368.84, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:44:40, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.0, 
+Mem Usage: 4.2, 
+Mem Used: 368.36, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:44:55, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.1, 
+Mem Usage: 4.2, 
+Mem Used: 376.12, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:45:10, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.1, 
+Mem Usage: 4.2, 
+Mem Used: 375.40, 
+Mem Total: 15788.21 
+
+Timestamp: 2025-04-01 19:45:25, 
+GPU Util: 0.0, 
+GPU Mem Util: 0.0, 
+GPU Mem Used: 1.0, 
+GPU Mem Total: 15360.0, 
+CPU Usage: 0.4, 
+Mem Usage: 4.2, 
+Mem Used: 375.01, 
+Mem Total: 15788.21 
+
