@@ -34,9 +34,15 @@ while True:
     mem_total = mem.total / (1024*1024)
 
     metrics = (
-        f"{now},"
-        f"{gpu_util},{gpu_mem_util},{gpu_mem_used},{gpu_mem_total},"
-        f"{cpu_usage},{mem_usage_percent},{mem_used:.2f},{mem_total:.2f}"
+        f"Timestamp: {now},"
+        f"GPU Util: {gpu_util},"
+        f"GPU Mem Util: {gpu_mem_util},"
+        f"GPU Mem Used: {gpu_mem_used},"
+        f"GPU Mem Total: {gpu_mem_total},"
+        f"CPU Usage: {cpu_usage},"
+        f"Mem Usage: {mem_usage_percent},"
+        f"Mem Used: {mem_used:.2f},"
+        f"Mem Total: {mem_total:.2f}"
     )
 
     with open("data/metrics_log.csv", "a") as f:
