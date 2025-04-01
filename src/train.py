@@ -124,7 +124,7 @@ def main(args, config):
 
     wandb.init(
         project=config["PROJECT"]["name"], 
-        name=f"{config["PROJECT"]["name"]}_{args.timestamp}",
+        name=f"{config["PROJECT"]["name"]}-{args.timestamp}",
         config={
             "epochs": config["TRAIN"]["epochs"],
             "batch_size": config["TRAIN"]["batch_size"],
