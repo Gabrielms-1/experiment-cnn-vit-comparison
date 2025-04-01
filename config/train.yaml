@@ -3,7 +3,7 @@ MODEL:
   n_classes: 5
   img_size: 640
   patch_size: 16
-  n_channels: 1
+  n_channels: 3
   n_heads: 3
   n_layers: 3
 
