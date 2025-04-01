@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-
 import time
 import subprocess
 import psutil
 from datetime import datetime
 
-INTERVAL = 30  # 30 seconds
+INTERVAL = 15  # 15 seconds
 
 with open("data/metrics_log.csv", "w") as f:
     f.write("Timestamp,GPU_Util(%),GPU_Mem_Util(%),GPU_Mem_Used(MB),GPU_Mem_Total(MB),CPU_Usage(%),Mem_Usage(%),Mem_Used(MB),Mem_Total(MB)\n")
@@ -30,7 +28,7 @@ while True:
 
     mem = psutil.virtual_memory()
     mem_usage_percent = mem.percent
-    mem_used = mem.used / (1024*1024)      # converte pra MB
+    mem_used = mem.used / (1024*1024)
     mem_total = mem.total / (1024*1024)
 
     metrics = (
