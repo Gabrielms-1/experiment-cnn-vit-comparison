@@ -138,7 +138,7 @@ def main(args):
     model.to(device)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=args.weight_decay)
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
 
