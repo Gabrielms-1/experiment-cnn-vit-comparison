@@ -147,7 +147,7 @@ if __name__ == "__main__":
         config = yaml.safe_load(f)
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("--project_name", type=str, default=config["LOCAL"]["project_name"])
+    parser.add_argument("--project_name", type=str, default=config["PROJECT"]["name"])
     parser.add_argument("--train_dir", type=str, default=config["LOCAL"]["train_dir"])
     parser.add_argument("--val_dir", type=str, default=config["LOCAL"]["val_dir"])
     parser.add_argument("--epochs", type=int, default=config["TRAIN"]["epochs"])
