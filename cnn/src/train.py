@@ -47,8 +47,8 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
             for p, t in zip(predicted, target):
                 confusion_matrix[t.long(), p.long()] += 1
 
-    average_loss = val_loss / len(val_loader.dataset)
-    accuracy = correct_predictions / total_samples
+        average_loss = val_loss / len(val_loader.dataset)
+        accuracy = correct_predictions / total_samples
 
     precision, recall, f1_score = compute_metrics(confusion_matrix)
 
