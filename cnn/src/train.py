@@ -111,7 +111,6 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         print(f"EPOCH: {epoch+1}")
         print(f"- train_loss: {epoch_loss:.4f} | train_accuracy: {epoch_accuracy:.4f}")
         print(f"- val_loss: {val_loss:.4f} | val_accuracy: {val_accuracy:.4f}")
-        print(f"- precision: {val_precision:.4f} | recall: {val_recall:.4f} | f1_score: {f1_score:.4f}")
         print("-" * 50) 
 
     return train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix
