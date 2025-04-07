@@ -3,7 +3,7 @@ PROJECT:
 
 MODEL:
   n_classes: 5
-  img_size: 640
+  img_size: 240
 
 TRAIN:
   epochs: 25
