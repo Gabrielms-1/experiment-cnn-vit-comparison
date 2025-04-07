@@ -18,4 +18,4 @@ LOCAL:
   train_dir: "../data/train"
   val_dir: "../data/val"  
   output_dir: "results"
-  check_point_dir: "checkpoints"
+  check_point_dir: "results/checkpoints"

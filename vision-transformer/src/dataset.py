@@ -4,12 +4,8 @@ import glob
 import os
 import cv2
 import numpy as np
-import yaml
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-
-with open('config/train.yaml', 'r') as f:
-    config = yaml.safe_load(f)
 
     
 class FolderBasedDataset(Dataset):

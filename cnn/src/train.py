@@ -142,21 +142,22 @@ def main(args):
     train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
 
 if __name__ == "__main__":
-    with open("config/train.yaml", "r") as f:
+    with open("train.yaml", "r") as f:
         config = yaml.safe_load(f)
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("--project_name", type=str, default=config["PROJECT"]["name"])
+    parser.add_argument("--project_name", type=str, default=config["CNN"]["PROJECT"]["name"])
     parser.add_argument("--train_dir", type=str, default=config["LOCAL"]["train_dir"])
     parser.add_argument("--val_dir", type=str, default=config["LOCAL"]["val_dir"])
     parser.add_argument("--epochs", type=int, default=config["TRAIN"]["epochs"])
     parser.add_argument("--batch_size", type=int, default=config["TRAIN"]["batch_size"])
     parser.add_argument("--lr", type=float, default=config["TRAIN"]["lr"])
     parser.add_argument("--weight_decay", type=float, default=config["TRAIN"]["weight_decay"])
-    parser.add_argument("--resize", type=int, default=config["MODEL"]["img_size"])
+    parser.add_argument("--resize", type=int, default=config["TRAIN"]["img_size"])
     parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M"))
-    parser.add_argument("--n_classes", type=int, default=config["MODEL"]["n_classes"])
+    parser.add_argument("--n_classes", type=int, default=config["TRAIN"]["n_classes"])
     parser.add_argument("--check_point_dir", type=str, default=config["LOCAL"]["check_point_dir"])
+    
     args = parser.parse_args()
     
     main(args)

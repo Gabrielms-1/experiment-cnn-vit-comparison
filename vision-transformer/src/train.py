@@ -123,48 +123,46 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
 def main(args, config):
 
     wandb.init(
-        project=f"{config['PROJECT']['name']}", 
-        name=f"{config['PROJECT']['name']}-{args.timestamp}",
+        project=f"{args.project_name}",
+        name=f"{args.project_name}-{args.timestamp}",
         config={
-            "epochs": config["TRAIN"]["epochs"],
-            "batch_size": config["TRAIN"]["batch_size"],
-            "learning_rate": config["TRAIN"]["lr"],
-            "d_model": config["MODEL"]["d_model"],
-            "n_classes": config["MODEL"]["n_classes"],
-            "img_size": config["MODEL"]["img_size"],
-            "patch_size": config["MODEL"]["patch_size"],
-            "n_channels": config["MODEL"]["n_channels"],
-            "n_heads": config["MODEL"]["n_heads"],
-            "n_layers": config["MODEL"]["n_layers"],
-
+            "epochs": args.epochs,
+            "batch_size": args.batch_size,
+            "learning_rate": args.lr,
+            "d_model": args.d_model,
+            "n_classes": args.n_classes,
+            "img_size": args.img_size,
+            "patch_size": args.patch_size,
+            "n_channels": args.n_channels,
+            "n_heads": args.n_heads,
+            "n_layers": args.n_layers,
+            "weight_decay": args.weight_decay,
         },
     )
 
-    os.makedirs(config["LOCAL"]["check_point_dir"], exist_ok=True)
+    os.makedirs(args.check_point_dir, exist_ok=True)
 
     train_loader, val_loader = process_data(args.train_dir, args.val_dir, args.resize, args.batch_size)
     val_dataset = FolderBasedDataset(args.val_dir, args.resize)
 
-    
-
     model = VisionTransformer(
-        config["MODEL"]["d_model"], 
-        config["MODEL"]["n_classes"], 
-        config["MODEL"]["img_size"], 
-        config["MODEL"]["patch_size"], 
-        config["MODEL"]["n_channels"], 
-        config["MODEL"]["n_heads"], 
-        config["MODEL"]["n_layers"],
+        args.d_model,
+        args.n_classes,
+        args.img_size,
+        args.patch_size,
+        args.n_channels,
+        args.n_heads,
+        args.n_layers,
     )
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=config["TRAIN"]["lr"])
+    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     criterion = torch.nn.CrossEntropyLoss()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     model.to(device)
 
-    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, config["TRAIN"]["epochs"], optimizer, criterion, train_loader, val_loader, device, args.n_classes)
+    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
 
     class_names = [str(val_dataset.int_to_label_map[i]) for i in range(confusion_matrix.shape[0])]
 
@@ -186,23 +184,35 @@ def main(args, config):
 
     wandb.finish()
 
-    save_path = os.path.join(config["LOCAL"]["check_point_dir"], "model_final.pth")
+    save_path = os.path.join(args.check_point_dir, "model_final.pth")
     torch.save(model.state_dict(), save_path)
     print(f"Model saved to {save_path}")
 
     return
 
 if __name__ == "__main__":
-    with open("config/train.yaml", "r") as f:
+    with open("train.yaml", "r") as f:
         config = yaml.safe_load(f)
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_dir", type=str, default=config["LOCAL"]["train_dir"])
     parser.add_argument("--val_dir", type=str, default=config["LOCAL"]["val_dir"])
     parser.add_argument("--batch_size", type=int, default=config["TRAIN"]["batch_size"])
-    parser.add_argument("--resize", type=int, default=config["MODEL"]["img_size"])
+    parser.add_argument("--resize", type=int, default=config["TRAIN"]["img_size"])
     parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M"))
-    parser.add_argument("--n_classes", type=int, default=config["MODEL"]["n_classes"])
+    parser.add_argument("--n_classes", type=int, default=config["TRAIN"]["n_classes"])
+    parser.add_argument("--project_name", type=str, default=config["VIT"]["PROJECT"]["name"])
+    parser.add_argument("--check_point_dir", type=str, default=config["LOCAL"]["check_point_dir"])
+    parser.add_argument("--epochs", type=int, default=config["TRAIN"]["epochs"])
+    parser.add_argument("--lr", type=float, default=config["TRAIN"]["lr"])
+    parser.add_argument("--d_model", type=int, default=config["VIT"]["MODEL"]["d_model"])
+    parser.add_argument("--img_size", type=int, default=config["TRAIN"]["img_size"])
+    parser.add_argument("--patch_size", type=int, default=config["VIT"]["MODEL"]["patch_size"])
+    parser.add_argument("--n_channels", type=int, default=config["VIT"]["MODEL"]["n_channels"])
+    parser.add_argument("--n_heads", type=int, default=config["VIT"]["MODEL"]["n_heads"])
+    parser.add_argument("--n_layers", type=int, default=config["VIT"]["MODEL"]["n_layers"])
+    parser.add_argument("--weight_decay", type=float, default=config["TRAIN"]["weight_decay"])
+    
     args = parser.parse_args()
     
     main(args, config)
