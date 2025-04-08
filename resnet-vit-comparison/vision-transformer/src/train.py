@@ -195,7 +195,7 @@ def main(args):
     return
 
 if __name__ == "__main__":
-    with open("train.yaml", "r") as f:
+    with open("../train.yaml", "r") as f:
         config = yaml.safe_load(f)
     
     parser = argparse.ArgumentParser()

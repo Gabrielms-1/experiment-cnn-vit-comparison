@@ -9,7 +9,6 @@ from albumentations.pytorch import ToTensorV2
 import sys
 sys.path.append(os.path.abspath(".."))
 from utils import seed_worker
-import yaml
 import torch
     
 class FolderBasedDataset(Dataset):

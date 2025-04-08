@@ -146,7 +146,7 @@ def main(args):
     train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
 
 if __name__ == "__main__":
-    with open("train.yaml", "r") as f:
+    with open("../train.yaml", "r") as f:
         config = yaml.safe_load(f)
        
     parser = argparse.ArgumentParser()
