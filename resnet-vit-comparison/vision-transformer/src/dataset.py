@@ -6,7 +6,9 @@ import cv2
 import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-
+from utils.seed import seed_worker, set_seed
+import yaml
+import torch
     
 class FolderBasedDataset(Dataset):
     def __init__(self, root_dir, resize=None):
@@ -55,28 +57,38 @@ class FolderBasedDataset(Dataset):
                 ToTensorV2()
             ])
         
-def create_dataloader(train_dataset, val_dataset, batch_size):
+def create_dataloader(train_dataset, val_dataset, batch_size, seed):
+    g = torch.Generator()
+    g.manual_seed(seed)
+
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
         shuffle=True,
         num_workers=2,
-        pin_memory=False
+        worker_init_fn=seed_worker,
+        pin_memory=True,
+        generator=g
     )
     val_loader = DataLoader(
         val_dataset,
         batch_size=batch_size,
         shuffle=False,
         num_workers=2,
-        pin_memory=False
+        worker_init_fn=seed_worker,
+        pin_memory=True
     )
     
     return train_loader, val_loader
 
 if __name__ == "__main__":
-    train_dataset = FolderBasedDataset(root_dir="../data/train", resize=400)
-    valid_dataset = FolderBasedDataset(root_dir="../data/val", resize=400)
+    train_dataset = FolderBasedDataset(root_dir="data/train", resize=400)
+    valid_dataset = FolderBasedDataset(root_dir="data/val", resize=400)
     
     _, valid_loader = create_dataloader(train_dataset, valid_dataset, batch_size=12)
     
+    with open("train.yaml", "r") as f:
+        config = yaml.safe_load(f)
+    seed_value = config["TRAIN"]["seed"]
+    set_seed(config["TRAIN"]["seed"])
 
