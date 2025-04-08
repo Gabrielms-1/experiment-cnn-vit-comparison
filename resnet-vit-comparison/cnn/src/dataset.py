@@ -6,8 +6,6 @@ import cv2
 import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-import sys
-sys.path.append(os.path.abspath(".."))
 from utils import seed_worker
 import torch
     
@@ -83,9 +81,12 @@ def create_dataloader(train_dataset, val_dataset, batch_size, seed):
     return train_loader, val_loader
 
 if __name__ == "__main__":
-    train_dataset = FolderBasedDataset(root_dir="../data/train", resize=400)
-    valid_dataset = FolderBasedDataset(root_dir="../data/val", resize=400)
-    
-    _, valid_loader = create_dataloader(train_dataset, valid_dataset, batch_size=12)
+    train_dataset = FolderBasedDataset(root_dir="cnn/data/train", resize=400)
+    valid_dataset = FolderBasedDataset(root_dir="cnn/data/val", resize=400)
+
+    train_loader, valid_loader = create_dataloader(train_dataset, valid_dataset, batch_size=12, seed=42)
+
+    print(f"Train batches: {len(train_loader)}")
+    print(f"Validation batches: {len(valid_loader)}")
     
 

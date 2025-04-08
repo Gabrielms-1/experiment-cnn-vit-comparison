@@ -7,14 +7,12 @@ from resnet50 import ResNet50
 import wandb
 import argparse
 from datetime import datetime
-import sys
-sys.path.append(os.path.abspath(".."))
 from utils import set_seed
 
 
-def process_data(train_dataset, val_dataset, resize, batch_size, seed):
-    train_dataset = FolderBasedDataset(train_dataset, resize)
-    val_dataset = FolderBasedDataset(val_dataset, resize)
+def process_data(train_dataset_path, val_dataset_path, resize, batch_size, seed):
+    train_dataset = FolderBasedDataset(train_dataset_path, resize)
+    val_dataset = FolderBasedDataset(val_dataset_path, resize)
     
     train_loader, val_loader = create_dataloader(train_dataset, val_dataset, batch_size, seed)
 
@@ -146,7 +144,7 @@ def main(args):
     train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
 
 if __name__ == "__main__":
-    with open("../train.yaml", "r") as f:
+    with open("train.yaml", "r") as f:
         config = yaml.safe_load(f)
        
     parser = argparse.ArgumentParser()
