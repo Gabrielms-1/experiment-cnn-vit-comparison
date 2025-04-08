@@ -1,0 +1,34 @@
+VIT:
+  PROJECT:
+    name: "pokemon-classification-vit"
+  MODEL:
+    d_model: 9
+    patch_size: 16
+    n_channels: 3
+    n_heads: 3
+    n_layers: 3
+
+CNN:
+  PROJECT:
+    name: "pokemon-classification-cnn"
+
+
+TRAIN:
+  n_classes: 5
+  epochs: 50
+  batch_size: 24
+  lr: 0.001
+  weight_decay: 1e-4
+  img_size: 240
+  seed: 42
+VAL:
+  batch_size: 24
+
+LOCAL:
+  train_dir: "../data/train"
+  val_dir: "../data/val"  
+  output_dir: "results"
+  check_point_dir: "results/checkpoints"
+
+
+
