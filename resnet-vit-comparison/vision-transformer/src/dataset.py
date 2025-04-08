@@ -7,7 +7,7 @@ import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import sys
-sys.path.append(os.path.abspath("../.."))
+sys.path.append(os.path.abspath(".."))
 from utils import seed_worker, set_seed
 import yaml
 import torch
