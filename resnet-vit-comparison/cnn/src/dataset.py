@@ -6,7 +6,9 @@ import cv2
 import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-from utils.seed import seed_worker, set_seed
+import sys
+sys.path.append(os.path.abspath(".."))
+from utils import seed_worker
 import yaml
 import torch
     

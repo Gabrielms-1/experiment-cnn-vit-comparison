@@ -7,7 +7,9 @@ from resnet50 import ResNet50
 import wandb
 import argparse
 from datetime import datetime
-from utils.seed import set_seed
+import sys
+sys.path.append(os.path.abspath(".."))
+from utils import set_seed
 
 
 def process_data(train_dataset, val_dataset, resize, batch_size, seed):
