@@ -25,10 +25,10 @@ VAL:
   batch_size: 24
 
 LOCAL:
-  train_dir: "../data/train"
-  val_dir: "../data/val"  
-  output_dir: "results"
-  check_point_dir: "results/checkpoints"
+  train_dir: "resnet-vit-comparison/data/train"
+  val_dir: "resnet-vit-comparison/data/val"  
+  output_dir: "resnet-vit-comparison/results"
+  check_point_dir: "resnet-vit-comparison/results/checkpoints"
 
 
 

@@ -10,9 +10,10 @@ import io
 from PIL import Image
 import seaborn as sns
 import matplotlib.pyplot as plt
-import sys
-sys.path.append(os.path.abspath(".."))
-from utils import set_seed
+from importlib.machinery import SourceFileLoader
+
+utils_seed_path = "./resnet-vit-comparison/utils/__init__.py"
+seed_module = SourceFileLoader("utils_seed", utils_seed_path).load_module()
 
 def process_data(train_dataset, val_dataset, resize, batch_size, seed):
 
@@ -195,7 +196,7 @@ def main(args):
     return
 
 if __name__ == "__main__":
-    with open("../train.yaml", "r") as f:
+    with open(f"{os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'train.yaml'))}", "r") as f:
         config = yaml.safe_load(f)
     
     parser = argparse.ArgumentParser()
@@ -219,6 +220,6 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=config["TRAIN"]["seed"])
     args = parser.parse_args()
     
-    set_seed(args.seed)
+    seed_module.set_seed(args.seed)
 
     main(args)
