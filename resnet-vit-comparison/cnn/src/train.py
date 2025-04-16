@@ -64,7 +64,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
     val_accuracies = []
     train_accuracies = []
 
-    model.train()
+    
     
     for epoch in range(total_epochs):
         epoch_loss = 0
@@ -72,6 +72,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         total_samples = 0
 
         for batch_idx, (data, target, _) in enumerate(train_loader):
+            model.train()
             data, target = data.to(device), target.to(device)
 
             optimizer.zero_grad()
