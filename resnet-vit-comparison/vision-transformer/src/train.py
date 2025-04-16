@@ -68,11 +68,11 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
     train_losses = []
     val_losses = []
     val_accuracies = []
-    train_accuracies = []
-
-    model.train()
+    train_accuracies = []    
 
     for epoch in range(total_epochs):
+        model.train()
+
         epoch_loss = 0
         correct_predictions = 0
         total_samples = 0
