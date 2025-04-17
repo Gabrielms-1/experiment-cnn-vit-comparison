@@ -1,3 +1,5 @@
+# In progress...
+
 # Dataset Analysis
 
 ## Train Split:
@@ -26,6 +28,7 @@ Class distribution:
 - Charmander: 55 images (21.57%)
 - Mewtwo: 59 images (23.14%)
 - Bulbasaur: 41 images (16.08%)
+
 
 # Experiment Setup
 
@@ -92,4 +95,3 @@ The Vision Transformer (ViT) model implemented is based on the architecture desc
 *   **Classifier:**
     *   The final state of the `[CLS]` token from the output sequence of the last Transformer Encoder block is used as the aggregate representation of the image.
     *   A simple Linear layer maps this `[CLS]` token representation (dimension `d_model`) to the final number of classes (`n_classes`).
-
