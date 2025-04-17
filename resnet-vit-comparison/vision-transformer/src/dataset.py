@@ -6,11 +6,12 @@ import cv2
 import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-import sys
-sys.path.append(os.path.abspath(".."))
-from utils import seed_worker, set_seed
 import yaml
 import torch
+from importlib.machinery import SourceFileLoader
+
+utils_seed_path = "./resnet-vit-comparison/utils/__init__.py"
+seed_module = SourceFileLoader("utils_seed", utils_seed_path).load_module()
     
 class FolderBasedDataset(Dataset):
     def __init__(self, root_dir, resize=None):
@@ -68,7 +69,7 @@ def create_dataloader(train_dataset, val_dataset, batch_size, seed):
         batch_size=batch_size,
         shuffle=True,
         num_workers=2,
-        worker_init_fn=seed_worker,
+        worker_init_fn=seed_module.seed_worker,
         pin_memory=True,
         generator=g
     )
@@ -77,7 +78,7 @@ def create_dataloader(train_dataset, val_dataset, batch_size, seed):
         batch_size=batch_size,
         shuffle=False,
         num_workers=2,
-        worker_init_fn=seed_worker,
+        worker_init_fn=seed_module.seed_worker,
         pin_memory=True
     )
     
