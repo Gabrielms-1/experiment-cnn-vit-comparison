@@ -70,9 +70,9 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         epoch_loss = 0
         correct_predictions = 0
         total_samples = 0
-
+        model.train()
         for batch_idx, (data, target, _) in enumerate(train_loader):
-            model.train()
+            
             data, target = data.to(device), target.to(device)
 
             optimizer.zero_grad()
@@ -156,8 +156,8 @@ if __name__ == "__main__":
     parser.add_argument("--val_dir", type=str, default=config["LOCAL"]["val_dir"])
     parser.add_argument("--epochs", type=int, default=config["TRAIN"]["epochs"])
     parser.add_argument("--batch_size", type=int, default=config["TRAIN"]["batch_size"])
-    parser.add_argument("--lr", type=float, default=config["TRAIN"]["lr"])
-    parser.add_argument("--weight_decay", type=float, default=config["TRAIN"]["weight_decay"])
+    parser.add_argument("--lr", type=float, default=config["CNN"]["MODEL"]["learning_rate"])
+    parser.add_argument("--weight_decay", type=float, default=config["CNN"]["MODEL"]["weight_decay"])
     parser.add_argument("--resize", type=int, default=config["TRAIN"]["img_size"])
     parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M"))
     parser.add_argument("--n_classes", type=int, default=config["TRAIN"]["n_classes"])
