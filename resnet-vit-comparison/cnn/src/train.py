@@ -70,9 +70,9 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         epoch_loss = 0
         correct_predictions = 0
         total_samples = 0
-
+        model.train()
         for batch_idx, (data, target, _) in enumerate(train_loader):
-            model.train()
+            
             data, target = data.to(device), target.to(device)
 
             optimizer.zero_grad()
