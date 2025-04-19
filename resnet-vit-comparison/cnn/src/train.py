@@ -8,6 +8,10 @@ import wandb
 import argparse
 from datetime import datetime
 from importlib.machinery import SourceFileLoader
+import io
+from PIL import Image
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 utils_seed_path = "./resnet-vit-comparison/utils/__init__.py"
 seed_module = SourceFileLoader("utils_seed", utils_seed_path).load_module()
@@ -58,13 +62,15 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
 
     return average_loss, accuracy, precision, recall, f1_score, confusion_matrix
     
-def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device, n_classes):
+def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device, n_classes, scheduler_step, scheduler_factor):
     train_losses = []
     val_losses = []
     val_accuracies = []
     train_accuracies = []
 
-    
+    best_f1_score = 0
+    f1_patience = 5
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step, gamma=scheduler_factor)
     
     for epoch in range(total_epochs):
         epoch_loss = 0
@@ -99,24 +105,39 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         epoch_accuracy = correct_predictions / total_samples
         train_accuracies.append(epoch_accuracy)
 
+        f1_score = torch.mean(val_f1_score)
         wandb.log({
             "epoch": epoch+1,
             "train_loss": epoch_loss,
             "val_loss": val_loss,
             "train_accuracy": epoch_accuracy,
             "val_accuracy": val_accuracy,
-            "precision": val_precision,
-            "recall": val_recall,
-            "f1_score": val_f1_score,
+            "f1_score": f1_score,
+            "lr": optimizer.param_groups[0]['lr']
         })
-
-        f1_score = torch.mean(val_f1_score)
 
         print("-" * 50)
         print(f"EPOCH: {epoch+1}")
         print(f"- train_loss: {epoch_loss:.4f} | train_accuracy: {epoch_accuracy:.4f}")
         print(f"- val_loss: {val_loss:.4f} | val_accuracy: {val_accuracy:.4f} | f1_score: {f1_score:.4f}")
+        print(f"- learning rate: {optimizer.param_groups[0]['lr']:.5f}")
         print("-" * 50) 
+
+        if f1_score >= best_f1_score:
+            best_f1_score = f1_score
+            f1_patience = 5
+            torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_best_f1_score.pth")
+            print(f"Model saved at epoch {epoch+1}")
+        else:
+            f1_patience -= 1
+            if f1_patience <= 0:
+                break
+        if f1_score >= 0.93:
+            if val_accuracy >= 0.93 and val_loss <= 0.24:
+                torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_{epoch+1}.pth")
+                print(f"Model saved at epoch {epoch+1}")
+                break
+        scheduler.step()
 
     return train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix
 
@@ -131,20 +152,48 @@ def main(args):
             "n_classes": args.n_classes,
             "img_size": args.resize,
             "weight_decay": args.weight_decay,
+            "dropout": args.dropout,
+            "scheduler_step": args.scheduler_step,
+            "scheduler_factor": args.scheduler_factor,
         },
     )
     os.makedirs(args.check_point_dir, exist_ok=True)
 
     train_loader, val_loader = process_data(args.train_dir, args.val_dir, args.resize, args.batch_size, args.seed)
-    
-    model = ResNet50(args.n_classes)
+    val_dataset = val_loader.dataset
+    model = ResNet50(args.n_classes, args.dropout)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
-    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
+    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes, args.scheduler_step, args.scheduler_factor)
+
+    class_names = [str(val_dataset.int_to_label_map[i]) for i in range(confusion_matrix.shape[0])]
+
+    cm_numpy = confusion_matrix.cpu().numpy()
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm_numpy, annot=True, fmt='.0f', cmap='Blues',
+                xticklabels=class_names, yticklabels=class_names)
+    plt.xlabel('Predicted Labels')
+    plt.ylabel('True Labels')
+    plt.title('Confusion Matrix')
+    plt.tight_layout()
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    cm_image = Image.open(buf)
+
+    wandb.log({"confusion_matrix_image": wandb.Image(cm_image)})
+
+    wandb.finish()
+
+    save_path = os.path.join(args.check_point_dir, "model_final.pth")
+    torch.save(model.state_dict(), save_path)
+    print(f"Model saved to {save_path}")
+
 
 if __name__ == "__main__":
     with open(f"{os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'train.yaml'))}", "r") as f:
@@ -158,6 +207,9 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=config["TRAIN"]["batch_size"])
     parser.add_argument("--lr", type=float, default=config["CNN"]["MODEL"]["learning_rate"])
     parser.add_argument("--weight_decay", type=float, default=config["CNN"]["MODEL"]["weight_decay"])
+    parser.add_argument("--dropout", type=float, default=config["CNN"]["MODEL"]["dropout"])
+    parser.add_argument("--scheduler_step", type=int, default=config["CNN"]["MODEL"]["scheduler_step"])
+    parser.add_argument("--scheduler_factor", type=float, default=config["CNN"]["MODEL"]["scheduler_factor"])
     parser.add_argument("--resize", type=int, default=config["TRAIN"]["img_size"])
     parser.add_argument("--timestamp", type=str, default=datetime.now().strftime("%Y%m%d-%H-%M"))
     parser.add_argument("--n_classes", type=int, default=config["TRAIN"]["n_classes"])

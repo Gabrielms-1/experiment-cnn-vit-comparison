@@ -35,7 +35,7 @@ class Bottleneck(nn.Module):
 
 
 class ResNet50(nn.Module):
-    def __init__(self, num_classes=5):
+    def __init__(self, num_classes=5, dropout=0.5):
         super().__init__()
         self.in_channels = 64
 
@@ -50,7 +50,7 @@ class ResNet50(nn.Module):
         self.layer4 = self._make_layer(512, 3, stride=2)
 
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        self.dropout = nn.Dropout(p=0.5)
+        self.dropout = nn.Dropout(p=dropout)
         self.fc = nn.Linear(512 * Bottleneck.expansion, num_classes)
 
     def _make_layer(self, mid_channels, blocks, stride=1):
