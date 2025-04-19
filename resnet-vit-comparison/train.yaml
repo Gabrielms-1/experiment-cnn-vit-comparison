@@ -2,27 +2,30 @@ VIT:
   PROJECT:
     name: "pokemon-classification-vit"
   MODEL:
+    learning_rate: 0.0001
     d_model: 192
     patch_size: 16
     n_channels: 3
     n_heads: 6
     n_layers: 12
+    weight_decay: 1e-4
 
 CNN:
   PROJECT:
     name: "pokemon-classification-cnn"
+  MODEL:
+    learning_rate: 0.0001
+    weight_decay: 1e-4
 
 
 TRAIN:
   n_classes: 5
   epochs: 50
   batch_size: 64
-  lr: 0.0001
-  weight_decay: 1e-4
   img_size: 240
   seed: 42
 VAL:
-  batch_size: 24
+  batch_size: 64
 
 LOCAL:
   train_dir: "resnet-vit-comparison/data/train"
