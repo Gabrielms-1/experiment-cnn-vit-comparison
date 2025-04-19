@@ -50,6 +50,7 @@ class ResNet50(nn.Module):
         self.layer4 = self._make_layer(512, 3, stride=2)
 
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.dropout = nn.Dropout(p=0.5)
         self.fc = nn.Linear(512 * Bottleneck.expansion, num_classes)
 
     def _make_layer(self, mid_channels, blocks, stride=1):
@@ -80,6 +81,7 @@ class ResNet50(nn.Module):
 
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
+        x = self.dropout(x)
         x = self.fc(x)
         
         return x
