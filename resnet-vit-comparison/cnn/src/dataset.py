@@ -63,8 +63,6 @@ def create_dataloader(train_dataset, val_dataset, batch_size, seed):
     g = torch.Generator()
     g.manual_seed(seed)
 
-    print(os.listdir("."))
-
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,

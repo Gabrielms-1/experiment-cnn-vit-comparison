@@ -69,7 +69,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
     train_accuracies = []
 
     best_f1_score = 0
-    f1_patience = 5
+    f1_patience = 8
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step, gamma=scheduler_factor)
     
     for epoch in range(total_epochs):
@@ -120,22 +120,22 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         print(f"EPOCH: {epoch+1}")
         print(f"- train_loss: {epoch_loss:.4f} | train_accuracy: {epoch_accuracy:.4f}")
         print(f"- val_loss: {val_loss:.4f} | val_accuracy: {val_accuracy:.4f} | f1_score: {f1_score:.4f}")
-        print(f"- learning rate: {optimizer.param_groups[0]['lr']:.5f}")
+        print(f"- learning rate: {optimizer.param_groups[0]['lr']:.7f}")
         print("-" * 50) 
 
         if f1_score >= best_f1_score:
             best_f1_score = f1_score
-            f1_patience = 5
+            f1_patience = 8
             torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_best_f1_score.pth")
-            print(f"Model saved at epoch {epoch+1}")
+            print(f"Model saved by best f1_score at epoch {epoch+1} with f1_score: {f1_score:.4f}")
         else:
             f1_patience -= 1
             if f1_patience <= 0:
                 break
-        if f1_score >= 0.93:
-            if val_accuracy >= 0.93 and val_loss <= 0.24:
+        if f1_score >= 0.95:
+            if val_accuracy >= 0.94 and val_loss <= 0.21:
                 torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_{epoch+1}.pth")
-                print(f"Model saved at epoch {epoch+1}")
+                print(f"Model saved by f1_score target at epoch {epoch+1} with f1_score: {f1_score:.4f}")
                 break
         scheduler.step()
 

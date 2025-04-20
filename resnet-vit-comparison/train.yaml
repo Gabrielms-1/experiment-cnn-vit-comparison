@@ -14,17 +14,17 @@ CNN:
   PROJECT:
     name: "pokemon-classification-cnn"
   MODEL:
-    learning_rate: 0.00005
+    learning_rate: 0.0002
     weight_decay: 1e-5
-    dropout: 0.4
-    scheduler_step: 10
-    scheduler_factor: 0.5
+    dropout: 0.6
+    scheduler_step: 15
+    scheduler_factor: 0.7
 
 TRAIN:
   n_classes: 5
-  epochs: 30
-  batch_size: 64
-  img_size: 240
+  epochs: 50
+  batch_size: 32
+  img_size: 200
   seed: 42
 VAL:
   batch_size: 64
