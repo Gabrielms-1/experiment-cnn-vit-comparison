@@ -22,7 +22,7 @@ CNN:
 
 TRAIN:
   n_classes: 5
-  epochs: 50
+  epochs: 30
   batch_size: 32
   img_size: 200
   seed: 42

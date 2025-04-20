@@ -45,7 +45,7 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
             data, target = data.to(device), target.to(device)
 
             output = model(data)
-            _, predicted = torch.max(output.detach(), 1)    
+            predicted = output.argmax(dim=1)   
             loss = criterion(output, target)
             
             val_loss += loss.item() * data.size(0)
@@ -77,6 +77,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         correct_predictions = 0
         total_samples = 0
         model.train()
+        
         for batch_idx, (data, target, _) in enumerate(train_loader):
             
             data, target = data.to(device), target.to(device)
@@ -84,7 +85,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
             optimizer.zero_grad()
 
             output = model(data)
-            _, predicted = torch.max(output.detach(), 1)
+            predicted = output.argmax(dim=1)
             loss = criterion(output, target)
             loss.backward()
             optimizer.step()
@@ -132,8 +133,8 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
             f1_patience -= 1
             if f1_patience <= 0:
                 break
-        if f1_score >= 0.95:
-            if val_accuracy >= 0.94 and val_loss <= 0.21:
+        if f1_score >= 0.93:
+            if val_accuracy >= 0.94 and val_loss <= 0.25:
                 torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_{epoch+1}.pth")
                 print(f"Model saved by f1_score target at epoch {epoch+1} with f1_score: {f1_score:.4f}")
                 break
@@ -144,7 +145,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
 def main(args):
     wandb.init(
         project=f"{args.project_name}", 
-        name=f"{args.project_name}-{args.timestamp}",
+        name=f"run-{args.timestamp}",
         config={
             "epochs": args.epochs,
             "batch_size": args.batch_size,
