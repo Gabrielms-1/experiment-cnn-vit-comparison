@@ -10,6 +10,7 @@ class PatchEmbedding(nn.Module):
         self.img_size = img_size
         self.patch_size = patch_size
         self.n_channels = n_channels
+        self.scale = d_model ** -0.5
 
         self.linear_project = nn.Conv2d(self.n_channels, self.d_model, kernel_size=self.patch_size, stride=self.patch_size)
 
@@ -17,7 +18,7 @@ class PatchEmbedding(nn.Module):
         x = self.linear_project(x)
         x = x.flatten(2)
         x = x.transpose(1, 2)
-        
+        x = x * self.scale
         return x
 
 class PositionalEmbeddingLearned(nn.Module):

@@ -2,19 +2,19 @@ VIT:
   PROJECT:
     name: "pokemon-classification-vit"
   MODEL:
-    learning_rate: 0.0001
+    learning_rate: 1e-4
     d_model: 192
     patch_size: 16
     n_channels: 3
     n_heads: 6
     n_layers: 12
-    weight_decay: 1e-4
-    dropout: 0.5
+    weight_decay: 0.05
+    dropout: 0.1
 CNN:
   PROJECT:
     name: "pokemon-classification-cnn"
   MODEL:
-    learning_rate: 0.0002
+    learning_rate: 2e-4
     weight_decay: 1e-5
     dropout: 0.6
     scheduler_step: 15
@@ -22,7 +22,7 @@ CNN:
 
 TRAIN:
   n_classes: 5
-  epochs: 30
+  epochs: 60
   batch_size: 32
   img_size: 192
   seed: 42

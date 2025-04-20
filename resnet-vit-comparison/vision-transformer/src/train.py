@@ -160,7 +160,7 @@ def main(args):
         args.n_layers,
     )
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
