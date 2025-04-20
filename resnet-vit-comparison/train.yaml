@@ -2,7 +2,7 @@ VIT:
   PROJECT:
     name: "pokemon-classification-vit"
   MODEL:
-    learning_rate: 1e-4
+    learning_rate: 5e-4
     d_model: 192
     patch_size: 16
     n_channels: 3
@@ -10,6 +10,10 @@ VIT:
     n_layers: 12
     weight_decay: 0.05
     dropout: 0.1
+    scheduler_factor: 0.7
+    scheduler_patience: 4
+    scheduler_min_lr: 5e-5
+
 CNN:
   PROJECT:
     name: "pokemon-classification-cnn"

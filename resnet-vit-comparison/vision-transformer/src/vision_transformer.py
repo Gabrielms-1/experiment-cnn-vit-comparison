@@ -47,6 +47,7 @@ class MultiHeadAttention(nn.Module):
         self.attn_dropout = nn.Dropout(dropout)
         self.proj = nn.Linear(d_model, d_model)
         self.proj_dropout = nn.Dropout(dropout)
+    
     def forward(self, x):
         B, N, D = x.shape
         qkv = self.qkv(x)

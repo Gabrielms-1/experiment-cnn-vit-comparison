@@ -2,6 +2,7 @@ import argparse
 import yaml
 import os
 import torch
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 from dataset import FolderBasedDataset, create_dataloader
 from vision_transformer import VisionTransformer
 import wandb
@@ -63,12 +64,14 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
     return average_loss, accuracy, precision, recall, f1_score, confusion_matrix
 
 
-def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device, n_classes):
+def train_model(model, total_epochs, optimizer, criterion, scheduler, train_loader, val_loader, device, n_classes):
 
     train_losses = []
     val_losses = []
     val_accuracies = []
     train_accuracies = []    
+
+    best_f1_score = 0
 
     for epoch in range(total_epochs):
         model.train()
@@ -104,6 +107,10 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
         epoch_accuracy = correct_predictions / total_samples
         train_accuracies.append(epoch_accuracy)
 
+        scheduler.step(val_loss)
+
+        f1_score = torch.mean(val_f1_score)
+
         wandb.log({
             "epoch": epoch+1,
             "train_loss": epoch_loss,
@@ -112,16 +119,27 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
             "val_accuracy": val_accuracy,
             "precision": val_precision,
             "recall": val_recall,
-            "f1_score": val_f1_score,
+            "f1_score": f1_score,
+            "training_lr": optimizer.param_groups[0]['lr']
         })
-
-        f1_score = torch.mean(val_f1_score)
 
         print("-" * 50)
         print(f"EPOCH: {epoch+1}")
         print(f"- train_loss: {epoch_loss:.4f} | train_accuracy: {epoch_accuracy:.4f}")
         print(f"- val_loss: {val_loss:.4f} | val_accuracy: {val_accuracy:.4f} | f1_score: {f1_score:.4f}")
-        print(f"-" * 50)
+        print(f"- training_lr: {optimizer.param_groups[0]['lr']:.7f}")
+        print("-" * 50)
+
+        if f1_score >= best_f1_score:
+            best_f1_score = f1_score
+            torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_best_f1_score.pth")
+            print(f"Model saved by best f1_score at epoch {epoch+1} with f1_score: {f1_score:.4f}")
+
+        if f1_score >= 0.93:
+            if val_accuracy >= 0.94 and val_loss <= 0.25:
+                torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_{epoch+1}.pth")
+                print(f"Model saved by f1_score target at epoch {epoch+1} with f1_score: {f1_score:.4f}")
+                break
 
     return train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix
 
@@ -129,7 +147,7 @@ def main(args):
 
     wandb.init(
         project=f"{args.project_name}",
-        name=f"{args.project_name}-{args.timestamp}",
+        name=f"run-{args.timestamp}",
         config={
             "epochs": args.epochs,
             "batch_size": args.batch_size,
@@ -142,6 +160,9 @@ def main(args):
             "n_heads": args.n_heads,
             "n_layers": args.n_layers,
             "weight_decay": args.weight_decay,
+            "scheduler_factor": args.scheduler_factor,
+            "scheduler_patience": args.scheduler_patience,
+            "scheduler_min_lr": args.scheduler_min_lr,
         },
     )
 
@@ -162,12 +183,13 @@ def main(args):
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=args.scheduler_factor, patience=args.scheduler_patience, min_lr=args.scheduler_min_lr)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     model.to(device)
 
-    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes)
+    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, scheduler, train_loader, val_loader, device, args.n_classes)
 
     class_names = [str(val_dataset.int_to_label_map[i]) for i in range(confusion_matrix.shape[0])]
 
@@ -218,6 +240,9 @@ if __name__ == "__main__":
     parser.add_argument("--n_layers", type=int, default=config["VIT"]["MODEL"]["n_layers"])
     parser.add_argument("--weight_decay", type=float, default=config["VIT"]["MODEL"]["weight_decay"])
     parser.add_argument("--seed", type=int, default=config["TRAIN"]["seed"])
+    parser.add_argument("--scheduler_factor", type=float, default=config["VIT"]["MODEL"]["scheduler_factor"])
+    parser.add_argument("--scheduler_patience", type=int, default=config["VIT"]["MODEL"]["scheduler_patience"])
+    parser.add_argument("--scheduler_min_lr", type=float, default=config["VIT"]["MODEL"]["scheduler_min_lr"])
     args = parser.parse_args()
     
     seed_module.set_seed(args.seed)

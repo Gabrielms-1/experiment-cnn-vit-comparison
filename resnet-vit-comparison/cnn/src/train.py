@@ -62,7 +62,7 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
 
     return average_loss, accuracy, precision, recall, f1_score, confusion_matrix
     
-def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loader, device, n_classes, scheduler_step, scheduler_factor):
+def train_model(model, total_epochs, optimizer, criterion, scheduler, train_loader, val_loader, device, n_classes):
     train_losses = []
     val_losses = []
     val_accuracies = []
@@ -70,7 +70,6 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
 
     best_f1_score = 0
     f1_patience = 8
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step, gamma=scheduler_factor)
     
     for epoch in range(total_epochs):
         epoch_loss = 0
@@ -114,14 +113,14 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
             "train_accuracy": epoch_accuracy,
             "val_accuracy": val_accuracy,
             "f1_score": f1_score,
-            "lr": optimizer.param_groups[0]['lr']
+            "training_lr": optimizer.param_groups[0]['lr']
         })
 
         print("-" * 50)
         print(f"EPOCH: {epoch+1}")
         print(f"- train_loss: {epoch_loss:.4f} | train_accuracy: {epoch_accuracy:.4f}")
         print(f"- val_loss: {val_loss:.4f} | val_accuracy: {val_accuracy:.4f} | f1_score: {f1_score:.4f}")
-        print(f"- learning rate: {optimizer.param_groups[0]['lr']:.7f}")
+        print(f"- training_lr: {optimizer.param_groups[0]['lr']:.7f}")
         print("-" * 50) 
 
         if f1_score >= best_f1_score:
@@ -169,7 +168,8 @@ def main(args):
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
-    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, train_loader, val_loader, device, args.n_classes, args.scheduler_step, args.scheduler_factor)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=args.scheduler_step, gamma=args.scheduler_factor)
+    train_losses, val_losses, val_accuracies, train_accuracies, confusion_matrix = train_model(model, args.epochs, optimizer, criterion, scheduler, train_loader, val_loader, device, args.n_classes)
 
     class_names = [str(val_dataset.int_to_label_map[i]) for i in range(confusion_matrix.shape[0])]
 
