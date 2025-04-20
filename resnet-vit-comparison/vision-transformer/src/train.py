@@ -45,7 +45,7 @@ def evaluate_model(model, val_loader, criterion, device, n_classes):
             data, target = data.to(device), target.to(device)
 
             output = model(data)
-            _, predicted = torch.max(output.detach(), 1)
+            predicted = output.argmax(dim=1)
             loss = criterion(output, target)
             
             val_loss += loss.item() * data.size(0)
@@ -83,7 +83,7 @@ def train_model(model, total_epochs, optimizer, criterion, train_loader, val_loa
             optimizer.zero_grad()
             
             output = model(data)
-            _, predicted = torch.max(output.detach(), 1)
+            predicted = output.argmax(dim=1)
             loss = criterion(output, target)
             loss.backward()
             optimizer.step()

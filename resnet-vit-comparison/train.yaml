@@ -24,7 +24,7 @@ TRAIN:
   n_classes: 5
   epochs: 30
   batch_size: 32
-  img_size: 200
+  img_size: 192
   seed: 42
 VAL:
   batch_size: 64
