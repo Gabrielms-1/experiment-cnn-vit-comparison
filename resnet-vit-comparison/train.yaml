@@ -18,11 +18,11 @@ CNN:
     weight_decay: 1e-5
     dropout: 0.6
     scheduler_step: 15
-    scheduler_factor: 0.7
+    scheduler_factor: 0.8
 
 TRAIN:
   n_classes: 5
-  epochs: 50
+  epochs: 25
   batch_size: 32
   img_size: 200
   seed: 42
