@@ -8,11 +8,10 @@ VIT:
     n_channels: 3
     n_heads: 6
     n_layers: 12
-    weight_decay: 0.05
-    dropout: 0.1
-    scheduler_factor: 0.7
-    scheduler_patience: 4
-    scheduler_min_lr: 5e-5
+    weight_decay: 1e-4
+    dropout: 0.2
+    scheduler_T_max: 40
+    scheduler_eta_min: 0
 
 CNN:
   PROJECT:
@@ -26,7 +25,7 @@ CNN:
 
 TRAIN:
   n_classes: 5
-  epochs: 60
+  epochs: 40
   batch_size: 32
   img_size: 192
   seed: 42

@@ -2,7 +2,7 @@ import argparse
 import yaml
 import os
 import torch
-from torch.optim.lr_scheduler import ReduceLROnPlateau
+from torch.optim.lr_scheduler import CosineAnnealingLR
 from dataset import FolderBasedDataset, create_dataloader
 from vision_transformer import VisionTransformer
 import wandb
@@ -71,7 +71,8 @@ def train_model(model, total_epochs, optimizer, criterion, scheduler, train_load
     val_accuracies = []
     train_accuracies = []    
 
-    best_f1_score = 0
+    best_val_loss = 0
+    patience_counter = 5
 
     for epoch in range(total_epochs):
         model.train()
@@ -107,7 +108,7 @@ def train_model(model, total_epochs, optimizer, criterion, scheduler, train_load
         epoch_accuracy = correct_predictions / total_samples
         train_accuracies.append(epoch_accuracy)
 
-        scheduler.step(val_loss)
+        scheduler.step()
 
         f1_score = torch.mean(val_f1_score)
 
@@ -130,10 +131,16 @@ def train_model(model, total_epochs, optimizer, criterion, scheduler, train_load
         print(f"- training_lr: {optimizer.param_groups[0]['lr']:.7f}")
         print("-" * 50)
 
-        if f1_score >= best_f1_score:
-            best_f1_score = f1_score
-            torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_best_f1_score.pth")
-            print(f"Model saved by best f1_score at epoch {epoch+1} with f1_score: {f1_score:.4f}")
+        if val_loss <= best_val_loss:
+            best_val_loss = val_loss
+            torch.save(model.state_dict(), f"{args.check_point_dir}/model_checkpoint_best_val_loss.pth")
+            print(f"Model saved by best val_loss at epoch {epoch+1} with val_loss: {val_loss:.4f}")
+            patience_counter = 5
+        else:
+            patience_counter -= 1
+            if patience_counter == 0:
+                print(f"Early stopping at epoch {epoch+1} with val_loss: {val_loss:.4f}")
+                break
 
         if f1_score >= 0.93:
             if val_accuracy >= 0.94 and val_loss <= 0.25:
@@ -151,7 +158,8 @@ def main(args):
         config={
             "epochs": args.epochs,
             "batch_size": args.batch_size,
-            "learning_rate": args.lr,
+            "learning_rate": args.learning_rate,
+            "dropout": args.dropout,
             "d_model": args.d_model,
             "n_classes": args.n_classes,
             "img_size": args.img_size,
@@ -160,9 +168,8 @@ def main(args):
             "n_heads": args.n_heads,
             "n_layers": args.n_layers,
             "weight_decay": args.weight_decay,
-            "scheduler_factor": args.scheduler_factor,
-            "scheduler_patience": args.scheduler_patience,
-            "scheduler_min_lr": args.scheduler_min_lr,
+            "scheduler_T_max": args.epochs,
+            "scheduler_eta_min": 0,
         },
     )
 
@@ -179,11 +186,12 @@ def main(args):
         args.n_channels,
         args.n_heads,
         args.n_layers,
+        args.dropout
     )
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay)
     criterion = torch.nn.CrossEntropyLoss(label_smoothing=0.1)
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=args.scheduler_factor, patience=args.scheduler_patience, min_lr=args.scheduler_min_lr)
+    scheduler = CosineAnnealingLR(optimizer, T_max=args.epochs, eta_min=0)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -231,7 +239,8 @@ if __name__ == "__main__":
     parser.add_argument("--project_name", type=str, default=config["VIT"]["PROJECT"]["name"])
     parser.add_argument("--check_point_dir", type=str, default=config["LOCAL"]["check_point_dir"])
     parser.add_argument("--epochs", type=int, default=config["TRAIN"]["epochs"])
-    parser.add_argument("--lr", type=float, default=config["VIT"]["MODEL"]["learning_rate"])
+    parser.add_argument("--learning_rate", type=float, default=config["VIT"]["MODEL"]["learning_rate"])
+    parser.add_argument("--dropout", type=float, default=config["VIT"]["MODEL"]["dropout"])
     parser.add_argument("--d_model", type=int, default=config["VIT"]["MODEL"]["d_model"])
     parser.add_argument("--img_size", type=int, default=config["TRAIN"]["img_size"])
     parser.add_argument("--patch_size", type=int, default=config["VIT"]["MODEL"]["patch_size"])
@@ -240,9 +249,6 @@ if __name__ == "__main__":
     parser.add_argument("--n_layers", type=int, default=config["VIT"]["MODEL"]["n_layers"])
     parser.add_argument("--weight_decay", type=float, default=config["VIT"]["MODEL"]["weight_decay"])
     parser.add_argument("--seed", type=int, default=config["TRAIN"]["seed"])
-    parser.add_argument("--scheduler_factor", type=float, default=config["VIT"]["MODEL"]["scheduler_factor"])
-    parser.add_argument("--scheduler_patience", type=int, default=config["VIT"]["MODEL"]["scheduler_patience"])
-    parser.add_argument("--scheduler_min_lr", type=float, default=config["VIT"]["MODEL"]["scheduler_min_lr"])
     args = parser.parse_args()
     
     seed_module.set_seed(args.seed)
